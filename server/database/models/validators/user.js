@@ -17,3 +17,7 @@ export const phoneNumberValidator = function(number)
 {
     return true;
 }
+
+export const enchrypt = async(password) => {
+    return password;
+}

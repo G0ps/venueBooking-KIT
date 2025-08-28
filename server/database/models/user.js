@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "./validators.js/user.js";
+import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "./validators/user.js";
 
 const schema = new mongoose.Schema({
     name : {
@@ -9,15 +9,12 @@ const schema = new mongoose.Schema({
 
     //contact info
     email : {
-        type : {
-            day : {type : Number , required : true},
-            month : {type : Number , required : true},
-            year : {type : Number , required : true}
-        },
+        type : String,
         required : true,
         validate : {
             validator : emailValidator
         },
+        unique : true,
         message : "Invalid email address"
     },
     contactNumber : {
@@ -30,7 +27,11 @@ const schema = new mongoose.Schema({
     
     //personal info
     dateOfBirth : {
-        type : Date,
+        type : {
+            day : {type : Number , required : true},
+            month : {type : Number , required : true},
+            year : {type : Number , required : true}
+        },
         required : true,
         validate : {
             validator : dateOfBirthValidator
@@ -47,11 +48,6 @@ const schema = new mongoose.Schema({
     emailVerificationOtp : {
         type : String,
         default : "000000",
-        validate : {
-            validator : (otp) => {
-                return otp !== "000000"
-            }
-        },
         message : "Wrong otp"
     },
     enchryptedPassword : {
@@ -64,11 +60,6 @@ const schema = new mongoose.Schema({
     passwordResetOtp : {
         type : String,
         default : "000000",
-        validate : {
-            validator : (otp) => {
-                return otp !== "000000"
-            }
-        },
         message : "Wrong otp"
     },
 

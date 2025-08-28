@@ -8,10 +8,7 @@ const schema = new mongoose.Schema({
   instances: {
     type: [
       {
-        id: { type: String, unique: true, required: true },
-        unavailableTimings: {
-          type: [{ start: { type: Date }, end: { type: Date } }]
-        }
+        id: { type: String, unique: true, required: true , unique : true},
       }
     ]
   },
@@ -23,3 +20,5 @@ const schema = new mongoose.Schema({
 })
 
 const model = mongoose.model('amenity', schema, 'amenity')
+
+export default model

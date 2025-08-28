@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { capacityValidator } from "./validators.js/venue"
+import { capacityValidator } from "./validators/venue.js"
 
 const schema = new mongoose.Schema({
     name : {
@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     },
     inbuiltAmenities : {
         type : [{
-            name : {type : String},
+            name : {type : String , unique : true},
             condition : {type : String , enum : ["WORKING" , "UNDER_MAINTANACE"] , default : "WORKING"}
         }]
     },
@@ -31,4 +31,6 @@ const schema = new mongoose.Schema({
   }
 })
 
-const model = mongoose.model('name' , schema , 'name')
+const model = mongoose.model('venue' , schema , 'venue')
+
+export default model
