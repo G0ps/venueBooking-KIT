@@ -5,6 +5,9 @@ dotenv.config();
 
 
 import connectDb from "./database/connectDb.js"
+import serverRouter from "./routers/main.js";
+
+
 
 const app = express()
 app.use(express.json());
@@ -14,10 +17,7 @@ app.use(cors({
 
 connectDb();
 
-app.get('/' , (req , res) => {
-    console.log("Hello from server")
-    return res.send("Hello from server")
-})
+app.use('/main',serverRouter)
 
 app.listen(process.env.PORT , () => {
     console.log("✅ Server Listening");

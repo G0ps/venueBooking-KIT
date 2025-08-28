@@ -1,8 +1,85 @@
 import mongoose from "mongoose"
+import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "./validators.js/user.js";
 
 const schema = new mongoose.Schema({
     name : {
-        type : String
+        type : String,
+        required : true
+    },
+
+    //contact info
+    email : {
+        type : {
+            day : {type : Number , required : true},
+            month : {type : Number , required : true},
+            year : {type : Number , required : true}
+        },
+        required : true,
+        validate : {
+            validator : emailValidator
+        },
+        message : "Invalid email address"
+    },
+    contactNumber : {
+        type : String,
+        required : true,
+        validate : {
+            validator : phoneNumberValidator
+        }
+    },
+    
+    //personal info
+    dateOfBirth : {
+        type : Date,
+        required : true,
+        validate : {
+            validator : dateOfBirthValidator
+        }
+    },
+    
+    //system info
+    typeOfUser : {
+        type : String,
+        required : true,
+        default : "USER",
+        enum : ["STAFF" , "MANAGER" , "ADMIN" , "USER"]
+    },
+    emailVerificationOtp : {
+        type : String,
+        default : "000000",
+        validate : {
+            validator : (otp) => {
+                return otp !== "000000"
+            }
+        },
+        message : "Wrong otp"
+    },
+    enchryptedPassword : {
+        type : String,
+        required : true,
+        validate : {
+            validator : passwordValidator
+        }
+    },
+    passwordResetOtp : {
+        type : String,
+        default : "000000",
+        validate : {
+            validator : (otp) => {
+                return otp !== "000000"
+            }
+        },
+        message : "Wrong otp"
+    },
+
+    //date aspects
+    joiningDate : {
+        type : Date,
+        required : true
+    },
+    lastLoginDate : {
+        type : Date,
+        required : true
     }
 })
 
