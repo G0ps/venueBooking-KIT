@@ -6,10 +6,10 @@ export const addNewBooking = async(req , res) => {
         const {eventName , description , userId , timeData , venueId} = req.body;
         if(!eventName || !description || !userId || !timeData || !venueId)
         {
-            return res.json({success : false , information : "The data provided is not enough" , data : req.body})
+            return res.status(500).json({success : false , information : "The data provided is not enough" , data : req.body})
         }
-
-        if(bookingTimeValidator(venueId , timeData.startTime , timeData.endTime))
+        let validity = await bookingTimeValidator(venueId , timeData.startTime , timeData.endTime);
+        if(validity === true)
         {
             const newBooking = new bookingModel(req.body);
 
@@ -18,11 +18,11 @@ export const addNewBooking = async(req , res) => {
             return res.json({success : true,message : "Success"})
         }
         else {
-            return res.json({success : false, information : "The timing is overlapping"})
+            return res.status(500).json({success : false, information : "The timing is overlapping"})
         }
     }
     catch(error)
     {
-        return res.json({success : false , error : error.message})
+        return res.status(500).json({success : false , error : error.message})
     }
 }

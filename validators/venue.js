@@ -1,3 +1,3 @@
 export const capacityValidator = (capacity) => {
-    return true;
+    return (capacity > 0 && capacity <= 1000);
 }

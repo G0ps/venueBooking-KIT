@@ -1,5 +1,5 @@
 import userModel from "../database/models/user.js"
-import {enchrypt} from "../database/models/validators/user.js"
+import {enchrypt} from "../../validators/user.js"
 
 export const addUser = async(req , res) =>{
     try{
@@ -29,5 +29,58 @@ export const addUser = async(req , res) =>{
     catch(error)
     {
         return res.status(500).json({success : false , error : error.message})
+    }
+
+}
+
+export const updateUser = async(req , res) =>{
+    try{
+        const {_id , newName , newEmail , newContactNumber , newDateOfBirth , newTypeOfUser , newPassword} = req.body;
+        if(!_id)
+        {
+            return res.status(500).json({success : false , message : "ID is required"})
+        }
+        const currentData = await userModel.findById(_id);
+        if(newName)
+        {
+            currentData.name = newName;
+        }
+        if(newEmail)
+        {
+            currentData.email = newEmail;
+            currentData.emailVerificationStatus = false;
+        }
+        if(newContactNumber)
+        {
+            currentData.contactNumber = newContactNumber;
+        }
+        if(newDateOfBirth)
+        {
+            currentData.dateOfBirth = newDateOfBirth;
+        }
+        if(newTypeOfUser)
+        {
+            currentData.typeOfUser = newTypeOfUser;
+        }
+        if(newPassword)
+        {
+            currentData.password = await enchrypt(newPassword);
+        }
+        
+        return res.status(200).json({success : true , message : "User updated sucessfully"});
+    }catch(error){
+        return res.status(500).json({success : false , message : error.message})
+    }
+}
+
+export const deleteUser = async(req , res) => {
+    try{
+        const {userId} = req.params;
+
+        await userModel.findByIdAndDelete({_id : userId});
+        return res.status(200).json({success : true , message : "User Deleted Sucessfully"});
+    }
+    catch(error){
+        return res.status(500).json({success : false , message : error.message})
     }
 }

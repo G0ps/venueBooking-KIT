@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "./validators/user.js";
+import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "../../../validators/user.js";
 
 const schema = new mongoose.Schema({
     name : {
@@ -71,6 +71,12 @@ const schema = new mongoose.Schema({
     lastLoginDate : {
         type : Date,
         required : true
+    },
+
+    //stat
+    emailVerificationStatus : {
+        type : Boolean,
+        default : false
     }
 })
 

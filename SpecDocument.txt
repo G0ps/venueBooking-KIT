@@ -1,0 +1,509 @@
+Nice — fresh start, I love it. 🎯
+Below you’ll find a **complete 30-day plan** split into **3 phases (10 days each)** — each phase ends with a clear **MVP** — plus a full **spec document** covering features you asked for (venues + amenities, LLM decision-assistant, worker category, multiple-venue booking, industry best practices, scalability, security, testing, deployment, APIs, DB schema, UI flows, prompts, and acceptance criteria).
+
+# Summary (one-liner)
+
+Build a MERN-based Venues & Amenities Booking System with worker management and an LLM-assisted manager decision layer — delivered as three incremental 10-day MVP phases over 30 days.
+
+---
+
+# 30-Day Timeline (day-by-day, Phase 1→3)
+
+Each day entry gives tasks and a short deliverable. Assume one full-time developer + part-time designer; adjust if team differs.
+
+## Phase 1 — Core platform + single-venue booking MVP (Days 1–10)
+
+**Goal:** Working web app where students can register/login, view venues & amenities, book a single venue+amenities slot, basic worker records, admin panel to approve bookings, and a minimal LLM assistant (read-only suggestions).
+
+**Day 1 — Project setup & backlog**
+
+* Initialize repo, branch strategy (main/dev/feature/\*).
+* Create project skeleton: monorepo or separate services (frontend React app, backend Node/Express, MongoDB).
+* Create issue backlog & wireframes for core flows (booking, admin).
+  **Deliverable:** Repo + issues + initial wireframes.
+
+**Day 2 — Auth + User model**
+
+* Implement JWT-based auth (register/login/refresh).
+* Roles: student/user, manager, worker, admin.
+  **Deliverable:** Auth endpoints + Postman collection + basic login UI.
+
+**Day 3 — Venue & Amenity models + CRUD**
+
+* DB collections: venues, amenities.
+* Admin UI to create/manage venues & amenities.
+  **Deliverable:** CRUD APIs + UI list/create forms.
+
+**Day 4 — Booking model & single-venue booking flow**
+
+* Booking API: create booking (single venue), list bookings, cancel.
+* Frontend booking UI (select venue, date/time slot, pick amenities).
+  **Deliverable:** Booking flow working end-to-end.
+
+**Day 5 — Worker model + basic assignment**
+
+* Worker categories (cleaner, electrician, security, verifier), availability model.
+* Admin can assign a worker to a booking.
+  **Deliverable:** Worker CRUD + assignment UI.
+
+**Day 6 — Prevent double-booking & basic concurrency**
+
+* Implement slot locking / atomic check using MongoDB transactions or optimistic locking (booking.status).
+* Add server-side validation to reject conflicts.
+  **Deliverable:** Safe single-venue booking under concurrent requests.
+
+**Day 7 — Admin approval workflows**
+
+* Booking statuses: PENDING, APPROVED, REJECTED, CANCELLED.
+* Manager can approve/reject; notification stub (email queued).
+  **Deliverable:** Approval panel.
+
+**Day 8 — Minimal LLM integration (read-only suggestions)**
+
+* Integrate an LLM *client* that accepts booking context and returns suggestions (e.g., recommend workers, highlight conflicts, suggest alternative time slots). **Manager must still approve**.
+* Provide prompt templates and endpoint to fetch suggestion. (LLM kept as assistant — no auto-approve.)
+  **Deliverable:** LLM suggestion UI for manager.
+
+**Day 9 — Frontend polish + validations**
+
+* UX for booking calendar/slot picker, amenity selection, worker info.
+* Add input validations and error handling.
+  **Deliverable:** Usable UI.
+
+**Day 10 — Testing & MVP1 acceptance**
+
+* End-to-end tests for booking flow, unit tests for critical server functions, run security checklist.
+  **MVP1 Acceptance Criteria:** Register/login, view venues, book a single venue + amenities, manager approve/reject, worker assignment, LLM suggestions available (read-only), concurrency safeguards.
+
+---
+
+## Phase 2 — Amenity-only booking, multi-venue events, worker verification (Days 11–20)
+
+**Goal:** Users can book only amenities (without venue), support multi-venue single-event bookings, on-site worker verification flows, notifications, and deeper LLM capabilities (recommendations + pre-populated decision notes).
+
+**Day 11 — Amenity-only booking**
+
+* Booking type: AMENITY\_ONLY (no venue).
+* UI to select one or multiple amenities and duration.
+  **Deliverable:** Amenity-only flows and APIs.
+
+**Day 12 — Event entity & multi-venue booking**
+
+* Introduce `Event` collection linking multiple venue bookings into a single event.
+* Create UI to build an event that reserves multiple venues/amenities in one transaction.
+  **Deliverable:** Multi-venue reservation flow with atomic commit/rollback.
+
+**Day 13 — Worker scheduling & shift generation**
+
+* Auto-generate worker shifts per booking/event, allow staff to accept shifts.
+  **Deliverable:** Worker schedule generator + worker acceptance endpoint.
+
+**Day 14 — On-site verification & checklists**
+
+* Worker verification checklist (cleaning completed, equipment functional, security signoff).
+* QR code-based verification URL for worker on mobile; manager can view verification status.
+  **Deliverable:** Verification UI + QR token generator.
+
+**Day 15 — LLM decision support v2**
+
+* Expand LLM: given an event with multiple venues/amenities, LLM suggests staffing levels, risks (e.g., overlapping cleaning windows), and a manager note draft.
+* Implement human-in-the-loop interface where manager edits AI draft and saves as decision log.
+  **Deliverable:** LLM-driven draft decisions + edit/save.
+
+**Day 16 — Notifications (email + push stub)**
+
+* Implement transactional email for bookings, worker shift notifications, manager alerts. Add WebSocket (Socket.io) for realtime updates.
+  **Deliverable:** Notification flows + socket events.
+
+**Day 17 — Payment & billing (optional minimal)**
+
+* If needed, integrate mock payment flow (or campus billing) for paid amenities. Record invoices, payment status.
+  **Deliverable:** Payment API stub + invoice model.
+
+**Day 18 — Audit logging & activity feed**
+
+* Log every booking action, LLM suggestion used/ignored, worker verification. Provide admin audit UI.
+  **Deliverable:** Audit logs + feed.
+
+**Day 19 — Security review & role hardening**
+
+* Enforce RBAC, input sanitation, rate limits, CORS rules, secrets vault, environment config.
+  **Deliverable:** Security checklist completed.
+
+**Day 20 — Testing & MVP2 acceptance**
+**MVP2 Acceptance Criteria:** Amenity-only booking, multi-venue booking (events), worker scheduling & on-site verification, notifications, LLM-assisted decision drafting, payment stub/invoice.
+
+---
+
+## Phase 3 — LLM automation & optimizations, analytics, production hardening (Days 21–30)
+
+**Goal:** Add advanced LLM features (smart auto-suggestions with confidence thresholds), analytics/dashboard, monitoring, CI/CD, and production deployment.
+
+**Day 21 — Advanced LLM: ranking & confidence**
+
+* LLM returns structured suggestions with confidence scores and reasoning. Build policy for auto-suggest vs manual.
+  **Deliverable:** Structured LLM response format & UI showing confidence.
+
+**Day 22 — Auto-scheduling assistant**
+
+* LLM suggests full staffing plan for an Event; if confidence > threshold and manager allows auto-apply, the system can auto-assign workers (but with human override).
+  **Deliverable:** Auto-apply flow w/ audit trail.
+
+**Day 23 — Dashboard & analytics**
+
+* Admin dashboard: bookings per week, worker utilization, venue utilization heatmap, upcoming events.
+  **Deliverable:** Basic analytics screens + summary reports.
+
+**Day 24 — Performance & DB scaling**
+
+* Add indices, shard/replica recommendations, caching (Redis) for hot reads (venue list, calendar). Optimize queries.
+  **Deliverable:** Performance tuning changes.
+
+**Day 25 — CI/CD pipeline & infra**
+
+* Pipelines for test → staging → production. IaC scripts (Terraform or platform-specific). Containerize (Docker), add Kubernetes/Cloud Run plan.
+  **Deliverable:** CI pipeline + deployment scripts.
+
+**Day 26 — Monitoring & alerting**
+
+* Integrate Sentry/Prometheus/Cloud Monitoring, health checks, log aggregation. Add alert rules for booking failures.
+  **Deliverable:** Monitoring + basic alerts.
+
+**Day 27 — Accessibility & usability**
+
+* Ensure forms are accessible, calendar has keyboard navigation; run basic accessibility test.
+  **Deliverable:** Accessibility fixes.
+
+**Day 28 — Final testing & security audit**
+
+* Pen-test high-level, dependency scan, secret leaks, load test booking flows.
+  **Deliverable:** Test reports + fixes.
+
+**Day 29 — Deploy to production & docs**
+
+* Deploy, run smoke tests, create user/admin docs, LLM prompt docs, runbook for incidents.
+  **Deliverable:** Production deployed + docs.
+
+**Day 30 — Buffer & handover**
+
+* Buffer for fixes, final demo, collect feedback & roadmap for next features (analytics improvements, mobile app, calendar integrations).
+  **Deliverable:** Demo + handover pack.
+
+---
+
+# Spec Document (detailed)
+
+## High-level features (must-haves)
+
+* **User roles**: Student/User, Manager, Admin, Worker.
+* **Bookings**:
+
+  * Book **Venue with amenities**, or **Amenity-only**.
+  * Support **single-venue booking** and **multi-venue Event** (atomic reservations across venues).
+  * Booking lifecycle: DRAFT → PENDING → APPROVED → SCHEDULED → COMPLETED → CANCELLED.
+* **Workers**:
+
+  * Worker categories: Cleaner, Maintainer, Electrician, Security, Verifier.
+  * Worker profiles: skills, certifications, availability, hourly rates (if paid).
+  * Worker shift assignment & accept/decline flow.
+  * On-site checklists & QR-based verification.
+* **LLM Integration**:
+
+  * Manager assistant for decision making: suggestions, staffing recommendations, risk flags, alternative schedules, decision draft notes.
+  * Human-in-the-loop: manager edits/approves LLM output; all decisions logged with LLM usage metadata.
+  * Structured LLM outputs: JSON with `suggestions[]`, `confidence`, `explanation`.
+* **Notifications**: Email + SMS/push stub + real-time socket events.
+* **Audit logs**: Capture actions, especially LLM-generated recommendation use/overrides.
+* **Payment & invoices** (optional): Amenity charges, venue rent, worker payments (campus accounting).
+* **Security & compliance**: RBAC, input validation, encrypted secrets, PII minimization.
+* **Scalability & monitoring**: Caching, indexing, monitoring dashboards, logs.
+
+---
+
+## Tech stack (recommended)
+
+* Frontend: **React** (+ React Router, React Query or SWR). Design: Tailwind CSS (clean professional look).
+* Backend: **Node.js + Express** (or NestJS for structure).
+* DB: **MongoDB** (Atlas for managed). Use transactions for multi-venue atomicity.
+* Cache: **Redis** for sessions & hot data.
+* Realtime: **Socket.io**.
+* LLM: **OpenAI API** or self-hosted (Llama 2/Alpaca derivative). Calls server-side; never expose raw keys to client.
+* Auth: **JWT** with refresh tokens or OAuth integration (college SSO).
+* CI/CD: GitHub Actions / GitLab CI.
+* Infra: Docker + Kubernetes / Cloud Run. Use Terraform for infra-as-code.
+* Observability: Prometheus (metrics) + Grafana, Sentry for errors, ELK/Cloud logging.
+
+---
+
+## Data model (MongoDB collections — example fields)
+
+(Indexes key fields like `venue._id`, `booking.eventId`, `booking.timeSlots.start`, `user.role`)
+
+### Users
+
+```json
+{
+  "_id": "ObjectId",
+  "name": "string",
+  "email": "string",
+  "role": "student|manager|admin|worker",
+  "passwordHash": "string",
+  "phone": "string",
+  "profile": {...},
+  "createdAt": "Date"
+}
+```
+
+### Venues
+
+```json
+{
+  "_id": "ObjectId",
+  "name": "Auditorium A",
+  "location": "Block 3, Floor 1",
+  "capacity": 200,
+  "amenities": ["proj-1","mics-2"],
+  "availabilityPolicy": {...}, // slot durations, rules
+  "images": [],
+  "tags": [],
+  "createdAt": "Date"
+}
+```
+
+### Amenities
+
+```json
+{
+  "_id": "ObjectId",
+  "name": "Projector",
+  "type": "equipment|service",
+  "rate": 0,
+  "requiresWorker": true,
+  "inventoryCount": 5
+}
+```
+
+### Booking
+
+```json
+{
+  "_id": "ObjectId",
+  "userId": ObjectId,
+  "type": "VENUE|AMENITY_ONLY",
+  "venueId": ObjectId,        // optional if AMENITY_ONLY false
+  "amenities": [{amenityId, qty}],
+  "start": Date,
+  "end": Date,
+  "status": "DRAFT|PENDING|APPROVED|SCHEDULED|COMPLETED|CANCELLED",
+  "assignedWorkers": [{workerId, role, status}],
+  "createdAt": Date,
+  "updatedAt": Date,
+  "eventId": ObjectId|null,
+  "auditTrail": [...]
+}
+```
+
+### Event (for multi-venue)
+
+```json
+{
+  "_id": "ObjectId",
+  "title": "Cultural Night",
+  "ownerId": ObjectId,
+  "bookings": [bookingId, bookingId],
+  "status": "PLANNED|ACTIVE|COMPLETED|CANCELLED"
+}
+```
+
+### Worker
+
+```json
+{
+  "_id": ObjectId,
+  "name": "Ramesh",
+  "category": "cleaner",
+  "skills": ["electronics"],
+  "availability": [...], // weekly rules
+  "acceptedShifts": [...],
+  "phone": "string"
+}
+```
+
+### AuditLog
+
+```json
+{
+  "_id": ObjectId,
+  "actorId": ObjectId,
+  "action": "BOOKING_CREATED|LLM_SUGGESTION_APPLIED|BOOKING_APPROVED",
+  "meta": {...},
+  "timestamp": Date
+}
+```
+
+---
+
+## API design (representative endpoints)
+
+Use REST with proper status codes. Provide idempotency keys for booking creation.
+
+* `POST /api/auth/register`
+* `POST /api/auth/login`
+* `GET /api/venues` — filters, availability query parameters
+* `POST /api/venues` (admin)
+* `GET /api/amenities`
+* `POST /api/bookings` — create booking (idempotency-key header)
+
+  * payload includes `type`, `venueId` or amenity list, `start`, `end`, `eventId?`
+* `POST /api/events` — create multi-venue event
+* `GET /api/bookings/:id`
+* `POST /api/bookings/:id/cancel`
+* `POST /api/bookings/:id/assign-worker` (manager/admin)
+* `POST /api/llm/suggest` — server-side endpoint that calls the LLM with booking/event context and returns structured suggestions (only accessible to managers/admin)
+* `POST /api/workers/:id/accept-shift`
+* `POST /api/verify/:bookingId` — QR link payload; worker updates verification checklist
+* `GET /api/dashboard/usage` — analytics (admin)
+
+**Security:** All endpoints require JWT except public venue list. Role checks enforced server-side.
+
+---
+
+## Concurrency & correctness
+
+* **Single-venue slot model**: define canonical time slots (e.g., 30/60/120 mins) or allow arbitrary start/end but check overlaps.
+* Use MongoDB **transactions (sessions)** when creating bookings that affect inventory or multiple documents (multi-venue event): create booking docs + decrement amenity inventory + write audit in same transaction.
+* **Idempotency Key**: client must send idempotency-key for booking creation to avoid duplicate bookings on retries.
+* **Optimistic locking**: document `version` field; reject or re-evaluate if version mismatch.
+* **Queue for worker assignment**: if heavy scheduling, use a job queue (BullMQ) to avoid race conditions.
+
+---
+
+## LLM integration (detailed)
+
+**Purpose:** Reduce manager decision pressure by summarizing risks, proposing staffing, suggesting alternative dates/times, drafting approval notes, and auto-scheduling when safe.
+
+**Where to call LLM:** Server-side only (backend), never expose API keys. Cache LLM output for repeatability and audit.
+
+**Input context for LLM:**
+
+* Booking/Event details: venues, capacities, start/end times, amenities list, historic utilization data (opt), worker availability, budget constraints, policy rules (noise restrictions), special flags (VIP).
+* Last 5 similar events (optional) for reference.
+
+**Desired structured response (JSON)**
+
+```json
+{
+  "suggestions": [
+    {
+      "id": "s1",
+      "type":"staffing",
+      "workers": [{"category":"cleaner","count":3},{"category":"security","count":2}],
+      "confidence": 0.87,
+      "rationale":"Large crowd expected, two back-to-back booking windows..."
+    }
+  ],
+  "risks": [
+    {"code":"OVERLAP_AMENITY","message":"Required projector quantity exceeds inventory", "severity":"high"}
+  ],
+  "draftManagerNote": "Suggested text for manager review..."
+}
+```
+
+**Prompt templates (server maintains)**:
+
+* Provide concrete templates with system and user messages; include policy such as "Do not return PII, return JSON only". Log prompt and response.
+
+**Policy & safety:**
+
+* LLM should **not** auto-approve unless configured and manager has explicitly enabled auto-apply with confidence thresholds.
+* Store LLM responses, prompt, and manager’s final action in AuditLog.
+* Provide a confidence threshold (e.g., 0.9) for auto-apply; otherwise require manager sign-off.
+
+**Human-in-loop flow:**
+
+1. Manager requests suggestion for booking/event.
+2. LLM returns structured suggestion + confidence.
+3. Manager can Accept (apply), Modify (edit draft), or Reject.
+4. System logs choice and optionally triggers assignments/notifications.
+
+---
+
+## UI / UX flows (key screens)
+
+* Venue catalogue + search + filter (capacity, location, amenities).
+* Calendar view with available slots (per-venue).
+* Booking wizard: choose venue(s), choose amenities, set times, preview cost, submit for approval.
+* Event builder for multi-venue bookings (drag & drop), conflict detection.
+* Manager dashboard with LLM suggestions panel, booking approvals queue, audit feed.
+* Worker mobile verification view (checklist + attach photos + signature).
+* Notifications center with booking updates.
+
+---
+
+## Worker verification best practices
+
+* Use QR code linking to a secure verification URL with a one-time token and time-limited validity.
+* Worker fills checklist, attaches optional photo proof, signs off.
+* Manager can re-open verification if issues found.
+* Store verification hashes + photos in secure object store with access controls.
+
+---
+
+## Testing strategy
+
+* Unit tests for all business logic (booking conflict checks, worker assignment).
+* Integration tests for booking and transaction flows (simulate concurrent bookings).
+* End-to-end tests for UI flows (Cypress / Playwright).
+* LLM integration tests use deterministic prompts and mocked LLM to verify parsing and safety constraints.
+* Load testing for booking hotspot scenarios (JMeter / k6).
+
+---
+
+## Production & DevOps
+
+* **CI:** Run lint, unit tests, integration tests, build.
+* **CD:** Staging on merge to `main`, manual promotion to prod.
+* **Secrets:** Use vault manager (AWS Secrets Manager / GCP Secret Manager).
+* **Backups:** Daily DB backups, point-in-time for DB as needed.
+* **Rollback:** Blue/green or canary deploy options.
+* **Monitoring:** Track booking success rate, LLM latency, worker acceptance rate.
+
+---
+
+## Acceptance Criteria (per phase recap)
+
+* **MVP1:** Basic booking/approval/worker assignment + LLM suggestions (read-only), concurrency safe.
+* **MVP2:** Amenity-only bookings, multi-venue events, worker scheduling & verification, notification flows.
+* **MVP3:** Advanced LLM structured suggestions + auto-apply policy, analytics, CI/CD, monitoring, production-ready deployment.
+
+---
+
+## Future ideas / industry-expected extras (post-30 days)
+
+* Calendar sync (Google Calendar / Outlook).
+* Mobile app for workers (accept shifts, verify).
+* Integrations with campus SSO & payment gateways.
+* Smart pricing (dynamic rates depending on demand).
+* Predictive staffing (use historical data to train small models for staffing forecasts).
+* SLA rules & escalation policies for no-shows or failed verification.
+
+---
+
+# Risks & Mitigations
+
+* **Double-booking risk** — mitigate with DB transactions, idempotency keys, locks.
+* **LLM hallucinations** — return structured JSON only, include confidence, require human approval for important actions.
+* **PII leaks** — minimize PII in prompts, store minimal user identifiable info with access controls.
+* **Worker no-show** — maintain backup pool & auto-notify replacements.
+
+---
+
+# Final notes & next steps (immediate)
+
+* If you want, I can:
+
+  * Export this spec to a markdown or a checklist file.
+  * Generate the DB schemas as Mongoose models.
+  * Draft the LLM prompt templates and the JSON schema for responses.
+  * Create Postman collection / sample Postgres? (we're using MongoDB)
+    Pick one and I’ll produce it next — I won’t ask for confirmation; I’ll just generate what you choose. Which of the above would you like me to produce right now?

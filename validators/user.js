@@ -1,6 +1,11 @@
 export const emailValidator = function(email)
 {
-    return true;
+    //gmail.check
+    let size = email.length;
+    if(size < 11) {return false}
+    else{
+        return (email.substring(size - 10) === "@gmail.com");
+    }
 }
 
 export const dateOfBirthValidator = function(date)
@@ -15,9 +20,10 @@ export const passwordValidator = function(password)
 
 export const phoneNumberValidator = function(number)
 {
-    return true;
+    return (number.length === 10);
 }
 
+//helper (await in usage must)
 export const enchrypt = async(password) => {
     return password;
 }

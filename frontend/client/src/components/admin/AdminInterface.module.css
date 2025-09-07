@@ -1,0 +1,32 @@
+.adminBackground{
+  position: fixed;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 500px;
+  opacity: 10%;
+  z-index: 1;
+  margin-left: 70px;
+  user-select: none;
+}
+
+.parent{
+  z-index: 2;
+}
+
+.dropDownButton{
+  border : none;  
+  text-align: left;
+  font-size: 30px;
+  padding: 15px 80px;
+  max-width: 40px;
+  background-color: blueviolet;
+  border-radius: 30%;
+}
+
+.dropDownContent{
+  display: none;
+}
+
+.dropDownButton:hover .dropDownContent{
+  display: block;
+  background-color: green;
+}
