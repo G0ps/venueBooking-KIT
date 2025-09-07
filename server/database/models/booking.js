@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { bookingTimeValidator } from './validators/booking.js'
+import { bookingTimeValidator } from '../../validators/booking.js'
 
 const schema = new mongoose.Schema({
   eventName: {

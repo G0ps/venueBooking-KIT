@@ -1,4 +1,4 @@
-import { bookingTimeValidator } from "../database/models/validators/booking.js";
+import { bookingTimeValidator } from "../validators/booking.js";
 import bookingModel from "../database/models/booking.js"
 
 export const addNewBooking = async(req , res) => {

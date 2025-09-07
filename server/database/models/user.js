@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "../../../validators/user.js";
+import { emailValidator , dateOfBirthValidator, passwordValidator, phoneNumberValidator} from "../../validators/user.js";
 
 const schema = new mongoose.Schema({
     name : {

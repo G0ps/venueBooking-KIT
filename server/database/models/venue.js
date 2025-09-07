@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { capacityValidator } from "./validators/venue.js"
+import { capacityValidator } from "../../validators/venue.js"
 
 const schema = new mongoose.Schema({
     name : {

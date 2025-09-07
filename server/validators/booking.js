@@ -1,4 +1,4 @@
-import bookingModel from "../booking.js";
+import bookingModel from "../database/models/booking.js";
 
 export const bookingTimeValidator = async (venueId, s, e) => {
   // Get all booked timings

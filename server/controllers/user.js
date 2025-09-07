@@ -1,5 +1,5 @@
 import userModel from "../database/models/user.js"
-import {enchrypt} from "../../validators/user.js"
+import {enchrypt} from "../validators/user.js"
 
 export const addUser = async(req , res) =>{
     try{
