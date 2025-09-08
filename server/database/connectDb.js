@@ -11,3 +11,5 @@ async function connectDb(){
 }
 
 export default connectDb;
+
+export const ObjectId = mongoose.Types.ObjectId;

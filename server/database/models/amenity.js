@@ -8,14 +8,14 @@ const schema = new mongoose.Schema({
   instances: {
     type: [
       {
-        id: { type: String, unique: true, required: true , unique : true},
+        name: { type: String, unique: true, required: true},
+        isWorking : {
+          type : String,
+          enum : ["WORKING" , "REPAIR"],
+          default : "WORKING"
+        }
       }
     ]
-  },
-  isWorking : {
-    type : String,
-    enum : ["WORKING" , "REPAIR"],
-    default : "WORKING"
   }
 })
 

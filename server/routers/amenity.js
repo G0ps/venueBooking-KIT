@@ -1,8 +1,9 @@
 import Router from "express"
-import { addNewAmenity } from "../controllers/amenity.js";
+import { addNewAmenity, updateAmenity } from "../controllers/amenity.js";
 
 const amenityRouter = Router();
 
-amenityRouter.use('/add/new' , addNewAmenity)
+amenityRouter.post('/add/new' , addNewAmenity)
+amenityRouter.patch('/update/amenity' , updateAmenity)
 
 export default amenityRouter

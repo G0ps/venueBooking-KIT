@@ -1,3 +1,4 @@
+import { ObjectId } from "../database/connectDb.js";
 import venueModel from "../database/models/venue.js"
 export const addNewVenue = async(req , res) => {
     
@@ -24,7 +25,7 @@ export const addNewVenue = async(req , res) => {
 }
 
 export const updateVenue = async (req, res) => {
-    const { _id, newName, newCapacity, newManagerId, deletedAmenityIndexes, newInbuiltAmenities } = req.body;
+    let { _id, newName, newCapacity, newManagerId, deletedAmenityIndexes, newInbuiltAmenities } = req.body;
     try{
         if (!_id) {
         return res.status(400).json({ success: false, message: "Id required" });
@@ -45,9 +46,11 @@ export const updateVenue = async (req, res) => {
             currentVenueData.managerId = newManagerId;
         }
         if (deletedAmenityIndexes) {
-            currentVenueData.inbuiltAmenities = currentVenueData.inbuiltAmenities.filter((amenity, index) => {
-                return !(deletedAmenityIndexes.includes(index));
-            });
+            deletedAmenityIndexes = deletedAmenityIndexes.map(obj => new ObjectId(obj));
+            await venueModel.updateOne(
+                {_id : _id},
+                {$pull : {inbuiltAmenities : {_id : {$in : deletedAmenityIndexes}}}}
+            )
         }
         if (newInbuiltAmenities) {
             currentVenueData.inbuiltAmenities.push(...newInbuiltAmenities);
@@ -58,7 +61,7 @@ export const updateVenue = async (req, res) => {
         return res.json({ success: true, message: "Venue updated", data: currentVenueData });
     }catch(error)
     {
-        return res.status(500).json({sucess : false , message : error});
+        return res.status(500).json({sucess : false , message : error.message});
     } 
 };
 
