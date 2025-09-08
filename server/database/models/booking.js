@@ -27,17 +27,21 @@ const schema = new mongoose.Schema({
     required: true
   },
   bookedAmenities: {
-    type: [
+    type : [
       {
-        typeId: { type: mongoose.Schema.Types.ObjectId, ref: 'amenity' },
-        instanceId: { type: [Number] }
+        instanceId : {type : mongoose.Types.ObjectId},
+        bookingStatus : {type : String , enum : ["PENDING" , "CANCELED" , "BOOKED"] , default : "PENDING"}
       }
-    ]
+    ],
   },
   bookingStatus: {
     type: String,
     enum: ['BOOKED', 'PENDING', 'COMPLETED', 'REJECTED'],
     default: 'PENDING'
+  },
+  bookingUpdate: {
+    type : Date,
+    default : Date.now
   }
 })
 

@@ -6,7 +6,7 @@ import { ObjectId } from "../database/connectDb.js"
 export const addNewAmenity = async(req , res) => {
     
     try{
-        const {name , instances} = req.body
+        let {name , instances} = req.body
 
         if(!name || !instances){
             return res.status(500).json({success : false , information : "Data defecient"})

@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     },
     inbuiltAmenities : {
         type : [{
-            name : {type : String , unique : true},
+            name : {type : String},
             condition : {type : String , enum : ["WORKING" , "UNDER_MAINTANACE"] , default : "WORKING"}
         }]
     },

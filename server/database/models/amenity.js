@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   instances: {
     type: [
       {
-        name: { type: String, unique: true, required: true},
+        name: { type: String,unique:true, required: true},
         isWorking : {
           type : String,
           enum : ["WORKING" , "REPAIR"],
