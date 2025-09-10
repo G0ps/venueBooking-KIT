@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "79667ce1-3bcb-4390-9602-980cbc931f53",
+		"name": "venueBooking-USER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44083888",
+		"_collection_link": "https://gopinaths-5668568.postman.co/workspace/Gopinath-S's-Workspace~add7cde8-a7fa-4032-82b4-b1e8d2b07b64/collection/44083888-79667ce1-3bcb-4390-9602-980cbc931f53?action=share&source=collection_link&creator=44083888"
+	},
+	"item": [
+		{
+			"name": "add new booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventName\" : \"Gobal Thiruvizah 5\",\r\n    \"description\" : \"Agilam kondadum ma berum thiruvizha\",\r\n    \"userId\" : \"68bd34eb786e4e195c48c0e3\",\r\n    \"timeData\" : {\r\n        \"startTime\" : \"2025-08-28T15:50:30.123Z\",\r\n        \"endTime\" : \"2025-08-28T17:45:30.123Z\"\r\n    },\r\n    \"bookedAmenities\" : [\"68beabc15763b66b129da505\"],\r\n    \"venueId\" : \"68bed94544fa3a3c0ac6a0fa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/booking/add/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"booking",
+						"add",
+						"new"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

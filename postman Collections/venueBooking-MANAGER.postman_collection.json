@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "1fd524f4-4cd2-4e7e-80f7-1d87332f7edb",
+		"name": "venueBooking-MANAGER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44083888",
+		"_collection_link": "https://gopinaths-5668568.postman.co/workspace/Gopinath-S's-Workspace~add7cde8-a7fa-4032-82b4-b1e8d2b07b64/collection/44083888-1fd524f4-4cd2-4e7e-80f7-1d87332f7edb?action=share&source=collection_link&creator=44083888"
+	},
+	"item": [
+		{
+			"name": "approve Booking",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\" : \"68bf069743fc5b72286286e0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/booking/approve/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"booking",
+						"approve",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reject Booking",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\" : \"68bf069743fc5b72286286e0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/booking/reject/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"booking",
+						"reject",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

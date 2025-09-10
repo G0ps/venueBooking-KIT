@@ -64,3 +64,25 @@ export const deleteBooking = async(req , res) =>{
         return res.status(500).json({success : false , message : error.message})
     }
 }
+
+export const rejectBooking = async(req , res) =>{
+    try{
+        const {bookingId} = req.body;
+
+        if(!bookingId)
+        {
+            return res.status(500).json({success : false , message : "Booking Id is manditory"})
+        }
+
+        const bookingData = await bookingModel.findById(bookingId);
+        // console.log(bookingData)
+        bookingData.bookingStatus = "REJECTED";
+        // bookingData.bookedAmenities = await amenityBookingPart(bookingData.bookedAmenities , bookingData.timeData)
+        // await overlapEliminator(bookingData.venueId , bookingData.timeData.startTime , bookingData.timeData.endTime)
+        await bookingData.save();
+
+        return res.status(200).json({success : true , message : "rejected Sucessfully"});
+    }catch(error){
+        return res.status(500).json({success : false , message : error.message})
+    }
+}

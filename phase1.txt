@@ -1,0 +1,2 @@
+* if some booking is canceled and the next high prior booking still alive may get that slot
+* self cancel and manager cancel

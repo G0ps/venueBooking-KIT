@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "c85740af-e5bf-44d8-ace2-fc589aec9c09",
+		"name": "venueBooking-CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44083888",
+		"_collection_link": "https://gopinaths-5668568.postman.co/workspace/Gopinath-S's-Workspace~add7cde8-a7fa-4032-82b4-b1e8d2b07b64/collection/44083888-c85740af-e5bf-44d8-ace2-fc589aec9c09?action=share&source=collection_link&creator=44083888"
+	},
+	"item": [
+		{
+			"name": "add new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gopinath S\",\r\n    \"email\": \"gopinathshanmugavel@gmail.com\",\r\n    \"contactNumber\": \"9344848312\",\r\n    \"dateOfBirth\": {\"day\" : 14 , \"month\" : 10 , \"year\" : 2005},\r\n    \"typeOfUser\": \"USER\",\r\n    \"password\": \"Aqwe$6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/user/add/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"user",
+						"add",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \r\n    \"newName\": \"Gopinath S\",\r\n    \"newEmail\": \"gopinathshanmugavel@gmail.com\",\r\n    \"newContactNumber\": \"9344848312\",\r\n    \"newDateOfBirth\": {\"day\" : 14 , \"month\" : 10 , \"year\" : 2005},\r\n    \"newTypeOfUser\": \"USER\",\r\n    \"newPassword\": \"Aqwe$6\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/user/update/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"user",
+						"update",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gopinath S\",\r\n    \"email\": \"gopinathshanmugavel@gmail.com\",\r\n    \"contactNumber\": \"9344848312\",\r\n    \"dateOfBirth\": {\"day\" : 14 , \"month\" : 10 , \"year\" : 2005},\r\n    \"typeOfUser\": \"USER\",\r\n    \"password\": \"Aqwe$6\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/user/delete/user/68b09250b7bf7d81da44aba5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"user",
+						"delete",
+						"user",
+						"68b09250b7bf7d81da44aba5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new amenity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"washing machine\",\r\n    \"instances\" : [\r\n        {\r\n            \"name\" : \"was-01\"\r\n        },\r\n        {\r\n            \"name\" : \"was-02\"\r\n        },\r\n        {\r\n            \"name\" : \"was-03\"\r\n        },\r\n        {\r\n            \"name\" : \"was-04\"\r\n        }\r\n    ]   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/amenity/add/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"amenity",
+						"add",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Amenity",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"68beabc15763b66b129da504\",\r\n    \"newName\": \"updated\",\r\n    \"amenityInstanceIdDelete\" : [\r\n        \"68beabc15763b66b129da506\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/amenity/update/amenity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"amenity",
+						"update",
+						"amenity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new venue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"A102\",\r\n    \"managerId\" : \"68b09250b7bf7d81da44aba5\",\r\n    \"capacity\" : 100,\r\n    \"inbuiltAmenities\" : [\r\n        {\r\n            \"name\" : \"AC01\"\r\n        },\r\n        {\r\n            \"name\" : \"AC02\"\r\n        },\r\n        {\r\n            \"name\" : \"AC03\"\r\n        },\r\n        {\r\n            \"name\" : \"speaker01\"\r\n        },\r\n        {\r\n            \"name\" : \"writing-pad01\"\r\n        },\r\n        {\r\n            \"name\" : \"writingpad02\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/venue/add/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"venue",
+						"add",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateVenue",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\" : \"68b098d36314afab6a3c6e04\",\r\n    \"newName\": \"A101\",\r\n    \"newManagerId\": \"68b09250b7bf7d81da44aba5\",\r\n    \"newCapacity\": 100,\r\n    \"deletedAmenityIndexes\": [\r\n        \"68bd32d92631de24c713d94b\",\r\n        \"68bd32d92631de24c713d94b\"\r\n    ],\r\n    \"newInbuiltAmenities\": [\r\n        {\r\n            \"name\": \"speaker03\"\r\n        },\r\n        {\r\n            \"name\": \"writing-pad03\"\r\n        },\r\n        {\r\n            \"name\": \"writingpad033\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/venue/update/venue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"venue",
+						"update",
+						"venue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateVenue2",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\" : \"68bd32d92631de24c713d948\",\r\n    \"newName\": \"A102\",\r\n    \"newCapacity\": 50,\r\n    \"deletedAmenityIndexes\": [\"68bd32d92631de24c713d94b\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/venue/update/venue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"venue",
+						"update",
+						"venue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteVenue",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "venueId",
+						"value": "test",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"venueId\" : \"68b098d36314afab6a3c6e04\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/main/venue/delete/venue/68b098d36314afab6a3c6e04",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"venue",
+						"delete",
+						"venue",
+						"68b098d36314afab6a3c6e04"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
