@@ -1,0 +1,29 @@
+{
+  "name": "venuebooking",
+  "version": "1.0.0",
+  "description": "venue booking app",
+  "homepage": "https://github.com/G0ps/venueBooking-KIT#readme",
+  "bugs": {
+    "url": "https://github.com/G0ps/venueBooking-KIT/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G0ps/venueBooking-KIT.git"
+  },
+  "license": "ISC",
+  "author": "gopinath",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:all": "npm install --prefix server && npm install --prefix frontend/client",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix frontend/client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "setup": "npm run install:all && npm run dev"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
